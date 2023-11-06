@@ -12,3 +12,5 @@ rootElement.render(
     <App />
   </React.StrictMode>
 );
+
+console.log("eeeee");

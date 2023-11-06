@@ -5,7 +5,7 @@ function DataDisplay() {
 
   useEffect(() => {
     // Fetch data from your API here
-    fetch('/v1/api/products')
+    fetch('/API/v1/api/products')
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => console.error('Error fetching data:', error));
@@ -13,12 +13,16 @@ function DataDisplay() {
 
   return (
     <div>
-      <h2>Data from API</h2>
-      <ul>
-        {data.map((product, id) => (
-          <li key={id}>{product.name}</li>
-        ))}
-      </ul>
+      <h2>Les Produits :</h2>
+      {data.length > 0 ? (
+        data.map((product, index) => (
+          <div className="product_listed" key={index}>
+            <a href={product.id}>{product.name}</a>
+          </div>
+        ))
+      ) : (
+        <p>Loading data...</p>
+      )}
     </div>
   );
 }
