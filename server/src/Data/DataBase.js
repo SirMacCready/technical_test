@@ -11,7 +11,7 @@ function DBConnect() {
 
         db.connect((err) => {
             if (err) {
-                reject(err); // Reject the promise if there's an error
+                reject(err); 
                 return;
             }
             console.log('Connected to MySQL database');
@@ -20,9 +20,9 @@ function DBConnect() {
 
             db.query(query, (err, results) => {
                 if (err) {
-                    reject(err); // Reject the promise if there's a query error
+                    reject(err); 
                 } else {
-                    resolve(results); // Resolve the promise with the query results
+                    resolve(results); 
                 }
             });
         });

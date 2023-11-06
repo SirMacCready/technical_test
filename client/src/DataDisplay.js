@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
-function ProductDisplay() {
+function DataDisplay() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Fetch data from your API here
-    fetch('/API/v1/api/products')
+    fetch('/api/v1/products')
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
-  const handleButtonClick = (productId) => {
-    // Send a POST request with the product ID when the button is clicked
-    fetch('/API/v1/api/processData', {
-      method: 'POST',
+  const selectProduct = (productId) => {
+    fetch('/selectProduct', {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -22,11 +20,8 @@ function ProductDisplay() {
     })
       .then((response) => {
         if (response.ok) {
-          // Handle the success case
-          window.location.href = '/ProductPage.html';
-          console.log('POST request successful');
+          // Ajouter l'action qui va se passer après le get du produit
         } else {
-          // Handle the error case
           console.error('Error:', response.status, response.statusText);
         }
       })
@@ -42,7 +37,7 @@ function ProductDisplay() {
         data.map((product, index) => (
           <div className="product_listed" key={index}>
             <a href={product.id}>{product.name}</a>
-            <button onClick={() => handleButtonClick(product.id)}>click</button>
+            <button onClick={() => selectProduct(product.id)}>click</button>
           </div>
         ))
       ) : (
@@ -52,4 +47,4 @@ function ProductDisplay() {
   );
 }
 
-export default ProductDisplay;
+export default DataDisplay;

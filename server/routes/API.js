@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const DBConnect = require('../src/Data/DataBase')
-router.get('/v1/api/products', async (req, res) => {
+router.get('/v1/products', async (req, res) => {
     try {
         const results = await DBConnect();
         res.json(results);
@@ -12,8 +12,8 @@ router.get('/v1/api/products', async (req, res) => {
     }
 });
 
-router.post('/v1/api/processData', function (req, res) {
-    res.redirect("/ProductPage.html")
+router.post('/v1/processData', function (req, res) {
+    console.log("zzz");
 });
 
 
