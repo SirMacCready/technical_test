@@ -9,15 +9,19 @@ const APIRoute = require("./routes/API");
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/public')));
+app.use(express.static(path.join(__dirname, '../client/src')));
 
-app.use(express.static(path.join("./server/src")));
+
+app.use(express.static(path.join(__dirname,"/src")));
 
 
 // Route handler for the root URL ("/")
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
+  res.sendFile(path.join('index.html'));
 });
-
+app.get('/ProductPage', (req, res) => {
+  redirect("/ProductPage")
+});
 app.use("/API", APIRoute);
 
 app.listen(port, () => {

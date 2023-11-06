@@ -1,5 +1,5 @@
 import React from 'react';
-import DataDisplay from './DataDisplay.js';
+import DataDisplay from './index/DataDisplay.js';
 
 function App() {
   return (
