@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const dataList = document.getElementById('data-list');
 
   try {
-      const response = await fetch('/api/products');
+      const response = await fetch('/v1/api/products');
       if (!response.ok) {
           throw new Error('Network response was not ok');
       }

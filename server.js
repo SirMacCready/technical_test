@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
 
-app.get('/api/products', async (req, res) => {
+app.get('/v1/api/products', async (req, res) => {
     try {
         const results = await DBConnect();
         res.json(results);
