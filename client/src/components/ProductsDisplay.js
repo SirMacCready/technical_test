@@ -9,7 +9,7 @@ function ProductsDisplay() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('/api/v1/products')
+    fetch('/api/v1/getproducts')
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => console.error('Error fetching data:', error));
