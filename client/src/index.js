@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import DataDisplay from './DataDisplay.js';
+import DataDisplay from './components/DataDisplay.js';
 function App() {
   return (
     <div className="App">
@@ -11,6 +11,7 @@ function App() {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <App />
     <App />
   </React.StrictMode>,
 );
