@@ -14,7 +14,6 @@ function DBConnect() {
                 reject(err); 
                 return;
             }
-            console.log('Connected to MySQL database');
 
             const query = 'SELECT * FROM products';
 

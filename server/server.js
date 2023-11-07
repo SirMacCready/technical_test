@@ -1,9 +1,13 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 5000; 
 const apiRoute = require("./routes/api");
+const port = 5000; 
+const bodyParser = require('body-parser');
 
+// Use body-parser middleware to parse JSON and URL-encoded data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Etablissement des routes statiques
 app.use(express.static(path.join('../client/public')));
