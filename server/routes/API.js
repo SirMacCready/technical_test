@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const queryAddToCart = require("../src/Data/DataBase")
 
 const DBConnect = require('../src/Data/DataBase')
 router.get('/v1/getproducts', async (req, res) => {
@@ -13,17 +14,18 @@ router.get('/v1/getproducts', async (req, res) => {
     }
 });
 
-router.post('/v1/addToCart', (req, res) => {
-    try{ // You can now access the data sent from the client in req.body
+router.post('/v1/addToCart', async (req, res) => {
+    console.log('in the POST');
     const { name, price, stock } = req.body;
-    console.log(name,price,stock);
     
+    try {
+      await queryAddToCart(name, price, stock);
+      res.status(200).json({ message: 'Product added to cart' });
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      res.status(500).json({ error: 'Error adding to cart' });
+    }
+  });
   
-    res.status(200).json({ message: 'Product added to cart' });
-    }
-    catch(error){
-        console.log(error,"ERROR in sending data to cart");
-    }
-});
 
 module.exports = router;
