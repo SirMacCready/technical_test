@@ -3,6 +3,7 @@ import ProductsInfo from './ProductInfo';
 
 import "../index.css"
 function ProductsDisplay() {
+  const [productId, setId] = useState("");
   const [name, setName] = useState("Choose A Product");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
@@ -19,6 +20,7 @@ function ProductsDisplay() {
     // Assuming you fetch the updated product data based on the selected productId
     // and update the state with the new values
     // Example:
+        setId(productId)
         setName(productName);
         setPrice(productPrice);
         setStock(productInventory);
@@ -39,7 +41,7 @@ function ProductsDisplay() {
         <p>Loading data...</p>
       )}
       </div>
-        <ProductsInfo name={name} price={price} stock={stock} />
+        <ProductsInfo id = {productId} name={name} price={price} stock={stock} />
       
     </div>
   );

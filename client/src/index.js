@@ -11,7 +11,7 @@ function App() {
   );
 }
 
-function ProductPage() { // Corrected the component name to start with an uppercase letter
+function ProductPage() {
   return (
     <div className="ProductPage">
       <ProductInfo />

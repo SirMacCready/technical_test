@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
 function ProductsInfo(props) {
+  const [count, setCount] = useState(0);
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setCount(value);
+  };
+
   const addToCart = () => {
     // Prepare the data you want to send
     const data = {
-      name: props.name,
-      price: props.price,
-      stock: props.stock,
+      product_id: props.id,
+      count: count,
+      stock: props.stock
     };
 
     // Send a POST request to your Express server
@@ -19,7 +25,7 @@ function ProductsInfo(props) {
     })
       .then((response) => {
         if (response.ok) {
-          console.log('sent');
+          //Mettre un message de réussite
         } else {
           // Handle an error response
           console.error('Error adding to cart');
@@ -36,6 +42,9 @@ function ProductsInfo(props) {
       <h1>{props.name}</h1>
       <h1>{props.price}</h1>
       <h1>{props.stock}</h1>
+      <input type="number" value={count} onChange={handleChange} min="0" max={props.stock} step="1"
+/>
+
       <button disabled={!props.price} onClick={addToCart}>Add to cart</button>
     </div>
   );

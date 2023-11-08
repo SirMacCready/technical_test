@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const queryAddToCart = require("../src/Data/DataBase")
+const queryAddToCart = require("../src/Data/Insert")
+const getProducts = require('../src/Data/getProducts')
 
-const DBConnect = require('../src/Data/DataBase')
 router.get('/v1/getproducts', async (req, res) => {
     try {
-        const results = await DBConnect();
+        const results = await getProducts();
         res.json(results);
     } 
     catch (error) {
@@ -15,11 +15,12 @@ router.get('/v1/getproducts', async (req, res) => {
 });
 
 router.post('/v1/addToCart', async (req, res) => {
-    console.log('in the POST');
-    const { name, price, stock } = req.body;
-    
+    const { product_id,count,stock } = req.body;
     try {
-      await queryAddToCart(name, price, stock);
+      if (count > stock) {
+        throw new Error('Count exceeds available stock');
+      }
+      await queryAddToCart(product_id, count);
       res.status(200).json({ message: 'Product added to cart' });
     } catch (error) {
       console.error('Error adding to cart:', error);
