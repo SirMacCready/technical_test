@@ -8,7 +8,7 @@ function getProducts() {
             password: '',
             database: 'technical_test',
         });
-
+        
         db.connect((err) => {
             if (err) {
                 reject(err); 

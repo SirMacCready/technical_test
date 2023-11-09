@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Header.css';
 
-function Header(props) {
+function Header({ showPayout }) {
   const [isHidden, setHidden] = useState(false);
   const [data, setData] = useState([]);
   const [productData, setProductData] = useState([]);
@@ -94,7 +94,7 @@ function Header(props) {
                 <p>Refresh Cart?</p>
               </div>
             )}
-            <button onClick={() => {}}>Proceed To Payment</button>
+            <button onClick={() => {console.log(showPayout); showPayout()}}>Proceed To Payment</button>
           </div>
         )}
       </div>

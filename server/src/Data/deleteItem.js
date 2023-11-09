@@ -22,7 +22,6 @@ function deleteItem(product_id) {
               console.error('Error inserting data:', err);
               reject(err); // Reject the promise in case of an error
             } else {
-              console.log('Data deleted');
               db.end(); // Close the database connection
               resolve(results); // Resolve the promise with the results
             }

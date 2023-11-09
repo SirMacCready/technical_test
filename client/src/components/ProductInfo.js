@@ -13,6 +13,7 @@ function ProductsInfo(props) {
       product_id: props.id,
       count,
       stock: props.stock,
+      price: props.price
     };
 
     fetch('/api/v1/addToCart', {
