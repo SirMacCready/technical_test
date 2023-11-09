@@ -1,3 +1,4 @@
+/* Common styles for #navbar, #login, and #cart */
 #navbar {
     z-index: 99;
     -webkit-touch-callout: none;
@@ -10,42 +11,41 @@
     background-color: white;
     width: 100%;
     border-bottom: 5px solid black;
-}
-/* #login{
-    
-} */
-#login:hover{
+  }
+  
+  /* Styles for #login and #cart */
+  #login:hover, #cart:hover {
     background-color: black;
-    color : white
-}
-/* #cart{
-
-} */
-#cart:hover{
-    background-color: black;
-    color : white
-
-}
-.productList {
-    
-  display:flebox ;
-}
-#cartItem {
-    width :50%;
-}
-.redbutton {
+    color: white;
+  }
+  
+  /* Product list styling */
+  .productList {
+    display: flex;
+  }
+  
+  /* Styling for #cartItem */
+  #cartItem {
+    width: 50%;
+  }
+  
+  /* Styling for .redbutton */
+  .redbutton {
     border-radius: 2px;
     text-align: center;
-    width:max-content;
+    width: max-content;
     height: max-content;
     background-color: red;
-    border: 1px solid white 
-}
-.redbutton:hover {
+    border: 1px solid white;
+  }
+  
+  /* Hover styles for .redbutton */
+  .redbutton:hover {
     border-radius: 2px;
     text-align: center;
-    width:max-content;
+    width: max-content;
     height: max-content;
     background-color: white;
     border: 1px solid red;
-}
+  }
+  
