@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ProductsInfo from './ProductInfo';
-
-import "../index.css"
 function ProductsDisplay() {
   const [productId, setId] = useState("");
   const [name, setName] = useState("Choose A Product");
@@ -27,19 +25,19 @@ function ProductsDisplay() {
   };
 
   return (
+    
     <div className="container">
       <div className="left">
-      <h2>Les Produits :</h2>
-      {data.length > 0 ? (
-        data.map((product, index) => (
-          <div className="product_listed" key={index}>
-            <h2>{product.name}</h2>
-            <button onClick={() => selectProduct(product.id,product.name,product.price,product.inventory)}>click</button>
-          </div>
-        ))
-      ) : (
-        <p>Loading data...</p>
-      )}
+        <h2>Les Produits :</h2>
+        {data.length > 0 ? (
+          data.map((product, index) => (
+            <div className="product_listed" key={index}>
+              <a className="productLink" onClick={() => selectProduct(product.id,product.name,product.price,product.inventory)}><h2>{product.name}</h2></a>
+            </div>
+          ))
+        ) : (
+          <p>Loading data...</p>
+        )}
       </div>
         <ProductsInfo id = {productId} name={name} price={price} stock={stock} />
       
