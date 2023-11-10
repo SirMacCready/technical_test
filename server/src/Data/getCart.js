@@ -23,6 +23,7 @@ function getCart() {
                 } else {
                     resolve(results); 
                 }
+                console.log(results);
             });
         });
     });

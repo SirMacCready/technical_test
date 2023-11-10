@@ -42,7 +42,6 @@ function placeorder() {
       
       insertPromises = insertQueries.map((values) => {
         values[3] = totalPrice
-        console.log(" the vals : " , values);
         const placeOrder = `INSERT INTO OrderItems (quantity, product_id, price_per_item,total_price, order_id)
           VALUES (?,?,?,?,?);`;
     
@@ -58,7 +57,6 @@ function placeorder() {
         });
       });
       insertPromises = insertQueries.map((values) => {
-        console.log(values);
         const stockDecreaseQuery = `UPDATE products SET inventory = inventory - ? WHERE id = ?`;
     
         return new Promise((resolve, reject) => {

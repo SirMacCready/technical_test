@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { createRoot } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import ProductsDisplay from './components/ProductsDisplay.js';
 import ProductInfo from './components/ProductInfo.js';
 import Header from './components/Header.js';
 import './index.css';
 import Payout from './components/Payout.js';
+
+
 
 
 function App() {

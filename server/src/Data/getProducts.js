@@ -23,7 +23,6 @@ function getProducts(itemToFind) {
             else {
                 selectQuery = select
             }
-            console.log(selectQuery);
             db.query(selectQuery,itemToFind, (err, results) => {
                 if (err) {
                     reject(err); 

@@ -15,7 +15,6 @@ const connectToDatabase = () => {
         return;
       }
 
-      console.log('Connected to the database');
       resolve(connection);
     });
   });
