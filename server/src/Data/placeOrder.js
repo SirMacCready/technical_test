@@ -16,9 +16,9 @@ function placeorder() {
           }
     
           // Query to retrieve data from a table
-    const query1 = 'SELECT * FROM user_cart';
+    const selectCart = 'SELECT * FROM user_cart';
 
-    db.query(query1, (error, results) => {
+    db.query(selectCart, (error, results) => {
       if (error) {
         console.error('Error executing the first query:', error);
         res.status(500).send('An error occurred');
@@ -28,12 +28,12 @@ function placeorder() {
       // Use the result to construct multiple INSERT queries
       const dataFromQuery1 = results; // Data retrieved from the first query
       let totalPrice =0
-      let RGN = Math.floor(Math.random() * (2000000000  - 1000000000) + 1000000000);
+      let RGN = Math.floor(Math.random() * (2000000000  - 1000000000));
       const insertQueries = dataFromQuery1.map((item) => {
         const product_id = item.product_id;
         const count = item.count;
         const price = item.price 
-        totalPrice = totalPrice + price * count
+        totalPrice += price * count;
         return [count, product_id, price,totalPrice,RGN];
       });
     
@@ -41,12 +41,13 @@ function placeorder() {
       
       
       insertPromises = insertQueries.map((values) => {
-        values[4] = totalPrice
-        const query2 = `INSERT INTO OrderItems (quantity, product_id, price_per_item,total_price, order_id)
+        values[3] = totalPrice
+        console.log(" the vals : " , values);
+        const placeOrder = `INSERT INTO OrderItems (quantity, product_id, price_per_item,total_price, order_id)
           VALUES (?,?,?,?,?);`;
     
         return new Promise((resolve, reject) => {
-          db.query(query2, values, (error, results2) => {
+          db.query(placeOrder, values, (error, results2) => {
             if (error) {
               console.error('Error executing one of the INSERT queries:', error);
               reject(error);

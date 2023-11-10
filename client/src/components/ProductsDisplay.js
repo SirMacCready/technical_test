@@ -15,10 +15,15 @@ function ProductsDisplay() {
   const selectProduct = (product) => {
     setSelectedProduct(product);
   };
-
   return (
     <div className="container">
       <div className="left">
+        <div className='searchbar'>
+          <form action='/api/v1/getproducts' method='POST'>
+            <input type='text' id="searchInput" name='searchInput' placeholder='jean, chapeau...'></input>
+            <button type='submit'>Search !</button>
+          </form>
+        </div>
         <h2>Les Produits :</h2>
         {products.length > 0 ? (
           products.map((product) => (

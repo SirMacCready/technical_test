@@ -16,7 +16,17 @@ router.get('/v1/getproducts', async (req, res) => {
         res.status(500).json({ error: 'Error fetching data' });
     }
 });
-
+router.post('/v1/getproducts', async (req, res) => {
+  const {searchInput} = req.body
+    try {
+        const results = await getProducts(searchInput);
+        res.status(200).json(results);
+    } 
+    catch (error) {
+        console.error('Database error:', error);
+        res.status(500).json({ error: 'Error fetching data' });
+    }
+});
 router.get('/v1/getCart', async (req, res) => {
   try {
       const results = await getCart();
