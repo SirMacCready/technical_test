@@ -6,21 +6,13 @@ const getCart = require('../src/Data/getCart')
 const deleteItem = require('../src/Data/deleteItem')
 const placeOrder = require('../src/Data/placeOrder')
 
-router.get('/v1/getproducts', async (req, res) => {
+router.get('/v1/getproducts/:productName', async (req, res) => {
+    let productName = req.params.productName;
+
+    productName= "%" + productName.slice(1) + "%";
     try {
-        const results = await getProducts();
+        const results = await getProducts(productName);
         res.json(results);
-    } 
-    catch (error) {
-        console.error('Database error:', error);
-        res.status(500).json({ error: 'Error fetching data' });
-    }
-});
-router.post('/v1/getproducts', async (req, res) => {
-  const {searchInput} = req.body
-    try {
-        const results = await getProducts(searchInput);
-        res.status(200).json(results);
     } 
     catch (error) {
         console.error('Database error:', error);

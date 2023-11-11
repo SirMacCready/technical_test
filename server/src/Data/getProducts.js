@@ -14,15 +14,7 @@ function getProducts(itemToFind) {
                 reject(err); 
                 return;
             }
-            let selectQuery = ""
-            const select = 'SELECT * FROM products ';
-            const where  = 'WHERE name = ?'
-            if (itemToFind) {
-                selectQuery = select + where
-            }
-            else {
-                selectQuery = select
-            }
+            const selectQuery = 'SELECT * FROM products WHERE name LIKE ?';
             db.query(selectQuery,itemToFind, (err, results) => {
                 if (err) {
                     reject(err); 

@@ -3,17 +3,15 @@ import './Header.css';
 import openCart from '../js/opencart';
 import refreshCart from '../js/refreshCart';
 import delFromCart from '../js/deleteFromCart';
+import getProductsNames from '../js/getProductsNames';
 
 function Header({ showPayout }) {
   const [isHidden, setHidden] = useState(false);
   const [data, setData] = useState([]);
-  const [productData, setProductData] = useState([]);
+  const [productData, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('/api/v1/getproducts')
-      .then((response) => response.json())
-      .then((data) => setProductData(data))
-      .catch((error) => console.error('Error fetching data:', error));
+    getProductsNames(setProducts,"")
   }, []);
 
   return (

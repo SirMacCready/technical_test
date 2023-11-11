@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import addToCart from '../js/addToCart';
 
 function ProductsInfo(props) {
   const [count, setCount] = useState(0);
@@ -6,33 +7,6 @@ function ProductsInfo(props) {
   const handleChange = (event) => {
     const value = event.target.value;
     setCount(value);
-  };
-
-  const addToCart = () => {
-    const data = {
-      product_id: props.id,
-      count,
-      stock: props.stock,
-      price: props.price
-    };
-
-    fetch('/api/v1/addToCart', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Handle success or show a success message
-        } else {
-          console.error('Error adding to cart');
-        }
-      })
-      .catch((error) => {
-        console.error('Network error:', error);
-      });
   };
 
   const isAddToCartDisabled = !props.price;
@@ -51,7 +25,7 @@ function ProductsInfo(props) {
         step="1"
       />
 
-      <button disabled={isAddToCartDisabled} onClick={addToCart}>
+      <button disabled={isAddToCartDisabled} onClick={() => addToCart(props.id,count,props.stock,props.price)}>
         Add to cart
       </button>
     </div>
