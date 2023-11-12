@@ -5,6 +5,7 @@ const getProducts = require('../src/Data/getProducts')
 const getCart = require('../src/Data/getCart')
 const deleteItem = require('../src/Data/deleteItem')
 const placeOrder = require('../src/Data/placeOrder')
+const errorMessage = require('../src/js/serverError');
 
 router.get('/v1/getproducts/:productName', async (req, res) => {
     let productName = req.params.productName;
@@ -15,8 +16,7 @@ router.get('/v1/getproducts/:productName', async (req, res) => {
         res.json(results);
     } 
     catch (error) {
-        console.error('Database error:', error);
-        res.status(500).json({ error: 'Error fetching data' });
+        errorMessage(error,res)
     }
 });
 router.get('/v1/getCart', async (req, res) => {
@@ -25,8 +25,7 @@ router.get('/v1/getCart', async (req, res) => {
       res.json(results);
   } 
   catch (error) {
-      console.error('Database error:', error);
-      res.status(500).json({ error: 'Error fetching data' });
+      errorMessage(error,res)
   }
 });
 router.post('/v1/addToCart', async (req, res) => {
@@ -36,10 +35,10 @@ router.post('/v1/addToCart', async (req, res) => {
         throw new Error('Count exceeds available stock');
       }
       await queryAddToCart(product_id, count,price);
-      res.status(200).json({ message: 'Product added to cart' });
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-      res.status(500).json({ error: 'Error adding to cart' });
+      errorMessage("product added !",res)
+    }
+    catch (error) {
+        errorMessage(error.message,res)
     }
   });
 
@@ -50,23 +49,22 @@ router.post('/v1/confirmPurchase', async (req, res) => {
     //   throw new Error('Something is wrong in your credentials, please retry') 
     // }
     await placeOrder();
-    res.status(200).json({ message: 'OrderPlaced' });
+    errorMessage("Order placed ! Thank you !",res)
 
-  } catch (error) {
-    console.error('Database error:', error);
-    res.status(500).json({ error: 'Error in payment' });
+  } 
+  catch (error) {
+      errorMessage(error.message,res)
   }
 });
 
 router.delete('/v1/deleteFromCart', async (req, res) => {
-  const {product_id} = req.body
+  const {product_id,productName} = req.body
   try {
-      const results = await deleteItem(product_id);
-      res.json(results);
+      await deleteItem(product_id);
+      errorMessage(productName + " has been deleted from your cart ",res)
   } 
   catch (error) {
-      console.error('Database error:', error);
-      res.status(500).json({ error: 'Error fetching data' });
+      errorMessage(error,res)
   }
 });
 

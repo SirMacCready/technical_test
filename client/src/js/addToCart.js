@@ -15,9 +15,7 @@ const addToCart = (id,count,stock,price) => {
     })
       .then((response) => {
         if (response.ok) {
-          // Handle success or show a success message
-        } else {
-          console.error('Error adding to cart');
+          window.location.reload();
         }
       })
       .catch((error) => {

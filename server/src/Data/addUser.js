@@ -1,6 +1,6 @@
 // const mysql = require('mysql');
 const mysql = require('mysql2');    
-function getProducts(itemToFind) {
+function    addUser(email,password) {
     return new Promise((resolve, reject) => {
         const db = mysql.createConnection({
             host: 'localhost',
@@ -8,16 +8,18 @@ function getProducts(itemToFind) {
             password: '',
             database: 'technical_test',
         });
-        
+
         db.connect((error) => {
             if (error) {
-                reject(error.message); 
+                reject(error); 
                 return;
             }
-            const selectQuery = 'SELECT * FROM products WHERE name LIKE ?';
-            db.query(selectQuery,itemToFind, (error, results) => {
+
+            const addUserQuery = 'INSERT INTO users (email,password) VALUES (?,?)';
+            const values = [email,password]
+            db.query(addUserQuery, values, (error, results) => {
                 if (error) {
-                    reject(error.message); 
+                    reject(error); 
                 } else {
                     resolve(results); 
                 }
@@ -26,4 +28,4 @@ function getProducts(itemToFind) {
     });
 }
 
-module.exports = getProducts
+module.exports = addUser

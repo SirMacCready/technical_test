@@ -9,21 +9,20 @@ function deleteItem(product_id) {
           database: 'technical_test',
         });
     
-        db.connect((err) => {
-          if (err) {
-            reject(err);
+        db.connect((error) => {
+          if (error) {
+            reject(error.message);
             return;
           }
     
           const query = 'DELETE FROM user_cart WHERE product_id = ?;';
           const values = [product_id];
-          db.query(query, values, (err, results) => {
-            if (err) {
-              console.error('Error inserting data:', err);
-              reject(err); // Reject the promise in case of an error
+          db.query(query, values, (error, results) => {
+            if (error) {
+              reject(error.message);
             } else {
-              db.end(); // Close the database connection
-              resolve(results); // Resolve the promise with the results
+              db.end();
+              resolve(results); 
             }
           });
         });

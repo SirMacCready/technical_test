@@ -10,9 +10,9 @@ async function queryAddToCart(productId, count, price) {
 
   try {
     await new Promise((resolve, reject) => {
-      db.connect((err) => {
-        if (err) {
-          reject(err);
+      db.connect((error) => {
+        if (error) {
+          reject(error.message);
         } else {
           resolve();
         }
@@ -22,9 +22,9 @@ async function queryAddToCart(productId, count, price) {
     const values = [productId, count, price];
     const findItemQuery = 'SELECT * FROM user_cart WHERE product_id = ?;';
     let results = await new Promise((resolve, reject) => {
-      db.query(findItemQuery, values, (err, results) => {
-        if (err) {
-          reject(err);
+      db.query(findItemQuery, values, (error, results) => {
+        if (error) {
+          reject(error.message);
         } else {
           resolve(results)
         }
@@ -37,9 +37,9 @@ async function queryAddToCart(productId, count, price) {
     if (!foundItem) {
       const insertToCartQuery = 'INSERT INTO user_cart (product_id, count, price) VALUES (?, ?, ?)';
       await new Promise((resolve, reject) => {
-        db.query(insertToCartQuery, values, (err, results) => {
-          if (err) {
-            reject(err);
+        db.query(insertToCartQuery, values, (error, results) => {
+          if (error) {
+            reject(error.message);
           } else {
             resolve(results);
           }
@@ -50,9 +50,9 @@ async function queryAddToCart(productId, count, price) {
       const values = [count,productId];
       const insertToCartQuery = 'UPDATE user_cart SET count = count + ? WHERE product_id = ? ';
       await new Promise((resolve, reject) => {
-        db.query(insertToCartQuery, values, (err, results) => {
-          if (err) {
-            reject(err);
+        db.query(insertToCartQuery, values, (error, results) => {
+          if (error) {
+            reject(error.message);
           } else {
             resolve(results);
           }
@@ -63,8 +63,8 @@ async function queryAddToCart(productId, count, price) {
     const checkStockQuery = `SELECT user_cart.product_id FROM user_cart INNER JOIN products ON user_cart.product_id = products.id WHERE user_cart.count > products.inventory; `
     results = await new Promise((resolve, reject) => {
       
-      db.query(checkStockQuery, (err, results) => {
-        if (err) {
+      db.query(checkStockQuery, (error, results) => {
+        if (error) {
           reject(err);
         } else {
           resolve(results);
@@ -77,10 +77,9 @@ async function queryAddToCart(productId, count, price) {
         const correctCount = `UPDATE user_cart SET user_cart.count = (SELECT products.inventory FROM products WHERE user_cart.product_id = products.id) WHERE user_cart.product_id = 5; `;
     
         return new Promise((resolve, reject) => {
-          db.query(correctCount, values, (error, results3) => {
+          db.query(correctCount, values, (error, results3) => {error
             if (error) {
-              console.error('Error executing one of the INSERT queries:', error);
-              reject(error);
+              reject(error.message);
             } else {
               resolve(results3);
             }

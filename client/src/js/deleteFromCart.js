@@ -1,7 +1,8 @@
 import refreshCart from './refreshCart';
-const delFromCart = (product_id) => {
+const delFromCart = (product_id,productName) => {
     const data = {
-      product_id: product_id,
+      product_id,
+      productName
     };
 
     fetch('/api/v1/deleteFromCart', {
@@ -13,15 +14,13 @@ const delFromCart = (product_id) => {
     })
       .then((response) => {
         if (response.ok) {
-          // Handle success or show a success message
-        } else {
-          console.error('Error deleting from cart');
+          console.log("OK");
+          window.location.reload();
         }
       })
       .catch((error) => {
         console.error('Network error:', error);
       });
 
-    refreshCart();
   };
   export default delFromCart

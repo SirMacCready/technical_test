@@ -9,9 +9,9 @@ const connectToDatabase = () => {
       database: 'technical_test',
     });
 
-    connection.connect((err) => {
-      if (err) {
-        reject(err);
+    connection.connect((error) => {
+      if (error) {
+        reject(error.message)
         return;
       }
 

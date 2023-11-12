@@ -10,10 +10,6 @@
     background-color: black;
     color: white;
 }
-#popupPayout:target {
-    visibility: visible;
-    display: block;
-}
 .exampleLine1 {
     position: relative;
     margin: 0 auto;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Payout.css';
 
 function Payout({hidePayout}) {
@@ -6,7 +6,9 @@ function Payout({hidePayout}) {
   return (
     <div id="modal">
       <div id="modal-context">
-        <div id="exampleLine1">
+        <div id="exampleLine1"><div onClick={()=>hidePayout()} id="removeModal">
+          X
+        </div>
           <h1>Payout : </h1>
           <form id="payment-form" action='/api/v1/confirmPurchase' method='post'>
             <label htmlFor="card-number">Card Number</label>
@@ -26,9 +28,7 @@ function Payout({hidePayout}) {
             <button type="submit">Submit Payment</button>
           </form>
         </div>
-        <div onClick={hidePayout} id="removeModal">
-          X
-        </div>
+        
       </div>
     </div>
 

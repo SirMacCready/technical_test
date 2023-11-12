@@ -5,7 +5,7 @@ import refreshCart from '../js/refreshCart';
 import delFromCart from '../js/deleteFromCart';
 import getProductsNames from '../js/getProductsNames';
 
-function Header({ showPayout }) {
+function Header({ showPayout ,showLogin }) {
   const [isHidden, setHidden] = useState(false);
   const [data, setData] = useState([]);
   const [productData, setProducts] = useState([]);
@@ -17,7 +17,7 @@ function Header({ showPayout }) {
   return (
     <div id="navbar">
       <div id="right-side">
-        <div id="login">Login</div>
+        <div id="login" onClick={() => {showLogin()}}>Login</div>
         <div id="cart" onClick={ () =>{ 
            openCart(isHidden, setHidden);
            refreshCart(setData)
@@ -33,7 +33,7 @@ function Header({ showPayout }) {
             {data.length > 0 ? (
               data.map((product, index) => (
                 <div className="productListed" key={index}>
-                  <a className="productCart">
+                  <h3 className="productCart">
                     {productData.map((productName)=> {
                       if (productName.id === product.product_id) {
                         return (
@@ -43,7 +43,7 @@ function Header({ showPayout }) {
                                 {productName.name} ({product.count})
                               </h2>
                             </div>
-                            <div className="redbutton" onClick={() => delFromCart(productName.id)}>
+                            <div className="redbutton" onClick={() => delFromCart(productName.id,productName.name)}>
                               X
                             </div>
                           </div>
@@ -51,7 +51,7 @@ function Header({ showPayout }) {
                       }
                       return null; // Handle cases with no matching product name
                     })}
-                  </a>
+                  </h3>
                 </div>
               ))
             ) : (
@@ -59,7 +59,7 @@ function Header({ showPayout }) {
                 <p>Refresh Cart?</p>
               </div>
             )}
-            <button onClick={() => {console.log(showPayout); showPayout()}}>Proceed To Payment</button>
+            <button onClick={() => {showPayout()}}>Proceed To Payment</button>
           </div>
         )}
       </div>
