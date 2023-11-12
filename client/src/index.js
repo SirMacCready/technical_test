@@ -10,8 +10,9 @@ import Login from './components/Login.js';
 import SignUp from './components/SignUp.js';
 import ErrorMessage from './components/ErrorMessage.js';
 
-
+//Construction de l'application Client
 function App() {
+  //Hooks
   const [isPayoutVisible, setPayoutVisibility] = useState(false);
   const [isLoginVisible, setLoginVisibility] = useState(false);
   const [isSignUpVisible, setSignUpVisibility] = useState(false);

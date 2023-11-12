@@ -1,8 +1,8 @@
 import React from 'react';
 import './Payout.css';
 
+//Popup de paiement 
 function Payout({hidePayout}) {
-
   return (
     <div id="modal">
       <div id="modal-context">

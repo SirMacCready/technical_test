@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+//Popup d'inscription
 function SignUp({hideSignUp, showLogin}) {
     return (
         <div id="modal">

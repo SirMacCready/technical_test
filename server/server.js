@@ -7,7 +7,6 @@ const port = 5000;
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 
-// Use body-parser middleware to parse JSON and URL-encoded data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -26,6 +25,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join('index.html'));
 });
 
+//Ecoute du port 5000
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

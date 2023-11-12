@@ -1,10 +1,12 @@
-import refreshCart from './refreshCart';
+//fonction pour retirer des articles de son panier
 const delFromCart = (product_id,productName) => {
+    //Les information permettant de retirer et d'afficher l'article retiré
     const data = {
       product_id,
       productName
     };
 
+    //Fetch de la requête 
     fetch('/api/v1/deleteFromCart', {
       method: 'DELETE',
       headers: {
@@ -14,7 +16,7 @@ const delFromCart = (product_id,productName) => {
     })
       .then((response) => {
         if (response.ok) {
-          console.log("OK");
+          //Reload en cas de succès
           window.location.reload();
         }
       })

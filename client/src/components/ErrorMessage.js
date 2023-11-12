@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import "./ErrorMessage.css"
 
+//Un composant qui affiche en haut de la page un message d'erreur 
 function ErrorMessage() {
-  const [errorMessage, setErrorMessage] = useState(false);
+    //création des hooks
+    const [errorMessage, setErrorMessage] = useState(false);
 
-  useEffect(() => {
-    // Get the error message from the cookie
-    const storedErrorMessage = Cookies.get('error');
+    //lorsque le composant s'initialise, on stocke temporairement le message dans une constante et on supprime le cookie pour éviter tout conflits avec les futures messages d'erreur
+    useEffect(() => {
+        //stockage du message
+        const storedErrorMessage = Cookies.get('error');
 
-    // Update the state only if there's an error message
-    if (storedErrorMessage) {
-      setErrorMessage(storedErrorMessage);
-    }
+        if (storedErrorMessage) {
+        setErrorMessage(storedErrorMessage);
+        }
+        //suppression du Cookie
+        document.cookie = 'error=; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+    }, []); 
 
-    // Clear the 'error' cookie
-    document.cookie = 'error=; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-  }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
-
-  return (
-    <div>
-      <h3>{errorMessage}</h3>
-    </div>
+    //affichage du message
+    return (
+        <div id="error">
+        <h3>{errorMessage}</h3>
+        </div>
   );
 }
 

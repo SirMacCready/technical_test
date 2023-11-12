@@ -2,6 +2,7 @@ const mysql = require('mysql2');
 
 function placeorder() {
     return new Promise((resolve, reject) => {
+      //infos de la BDD
         const db = mysql.createConnection({
           host: 'localhost',
           user: 'root',
@@ -9,26 +10,29 @@ function placeorder() {
           database: 'technical_test',
         });
     
+        //Connexion
         db.connect((err) => {
           if (err) {
             reject(err);
             return;
           }
-    
-          // Query to retrieve data from a table
+    //Sélection du Panier
     const selectCart = 'SELECT * FROM user_cart';
 
+    //exec de la requête
     db.query(selectCart, (error, results) => {
       if (error) {
         console.error('Error executing the first query:', error);
         res.status(500).send('An error occurred');
         return;
       }
-    
-      // Use the result to construct multiple INSERT queries
-      const dataFromQuery1 = results; // Data retrieved from the first query
+      
+      //récupération des résultats de la query1
+      const dataFromQuery1 = results; 
       let totalPrice =0
+      //Id aléatoire pour la commande
       let RGN = Math.floor(Math.random() * (2000000000  - 1000000000));
+      //calcul du prix total et mapping des articles dans le panier
       const insertQueries = dataFromQuery1.map((item) => {
         const product_id = item.product_id;
         const count = item.count;
@@ -37,9 +41,8 @@ function placeorder() {
         return [count, product_id, price,totalPrice,RGN];
       });
     
-      // Execute multiple INSERT queries in parallel using Promise.all
       
-      
+      //Insertion des articles commandés
       insertPromises = insertQueries.map((values) => {
         values[3] = totalPrice
         const placeOrder = `INSERT INTO OrderItems (quantity, product_id, price_per_item,total_price, order_id)
@@ -56,6 +59,7 @@ function placeorder() {
           });
         });
       });
+      //Mise à jour des stocks 
       insertPromises = insertQueries.map((values) => {
         const stockDecreaseQuery = `UPDATE products SET inventory = inventory - ? WHERE id = ?`;
     
@@ -70,14 +74,12 @@ function placeorder() {
           });
         });
       });
-      // Wait for all INSERT queries to complete
       Promise.all(insertPromises)
         .then((insertResults) => {
-          // Process the results of the INSERT queries if needed
-          // Send a response or perform other actions as needed
           resolve(insertResults)
         })
         .then(() => {
+        // Remise à zero de la table Panier
         const truncateQuery = `TRUNCATE TABLE user_cart;` 
         db.query(truncateQuery, (error, results2) => {
           if (error) {
@@ -88,7 +90,6 @@ function placeorder() {
           }
         });})
         .catch((error) => {
-          // Handle errors from the INSERT queries
           console.error('Error executing one or more INSERT queries:', error);
           reject(error)
         });

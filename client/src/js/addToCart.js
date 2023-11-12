@@ -1,4 +1,6 @@
+//Fonction permettant d'ajouter des articles à son panier
 const addToCart = (id,count,stock,price) => {
+    //Les informations sur l'article
     const data = {
       product_id: id,
       count,
@@ -6,6 +8,7 @@ const addToCart = (id,count,stock,price) => {
       price: price
     };
 
+    //fetch de la requête POST 
     fetch('/api/v1/addToCart', {
       method: 'POST',
       headers: {
@@ -15,10 +18,12 @@ const addToCart = (id,count,stock,price) => {
     })
       .then((response) => {
         if (response.ok) {
+          //Reload de la page en cas de succès
           window.location.reload();
         }
       })
       .catch((error) => {
+        //Erreur de connection 
         console.error('Network error:', error);
       });
   };

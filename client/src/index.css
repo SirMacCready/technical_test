@@ -1,5 +1,4 @@
-/* Reset default browser styles */
-/* In your CSS file (e.g., styles.css) */
+
 .no-scroll {
   overflow: hidden !important;
 }
@@ -13,12 +12,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Code styling */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* Layout and positioning */
 .right {
   position: fixed;
   margin-top: 63px;
@@ -40,10 +37,9 @@ code {
   flex: 1;
   background-color: lightblue;
   padding: 10px;
-  padding-right: 500px; /* You can adjust this value as needed */
+  padding-right: 500px; 
 }
 
-/* Product link styles */
 .productLink {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
