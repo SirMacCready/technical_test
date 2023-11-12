@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 async function queryAddToCart(productId, count, price) {
   //infos de la BDD
