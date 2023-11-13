@@ -1,6 +1,6 @@
 //Import des outils et fonctions 
 import React, { useState, useEffect } from 'react';
-import './Header.css';
+import './header.css';
 import openCart from '../js/opencart';
 import refreshCart from '../js/refreshCart';
 import delFromCart from '../js/deleteFromCart';
